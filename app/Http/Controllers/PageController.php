@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 class PageController extends Controller
 {
     public function index() {
-        $movies = Movie::all();
+        $movies = Movie::where('vote', '>', 9)
+                                ->orderBy('title', 'asc')
+                                ->limit(10)->get();
         return view('home', [ 'movies' => $movies]);
     }
 }
